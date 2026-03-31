@@ -9,13 +9,11 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             display: flex; justify-content: center; align-items: center; 
             min-height: 100vh; margin: 0; 
-            /* Стильний градієнт з ефектом сяйва */
             background: radial-gradient(circle at top right, #2a5298, #1e3c72);
             background-attachment: fixed;
             color: #333; padding: 40px 0;
         }
         
-        /* Декоративні кола на фоні */
         body::before {
             content: ""; position: fixed; top: -10%; left: -10%; width: 40%; height: 40%;
             background: rgba(255, 215, 0, 0.1); filter: blur(80px); border-radius: 50%; z-index: -1;
@@ -33,10 +31,11 @@
         }
 
         .logo { 
-            width: 160px; height: 160px; border-radius: 50%; 
-            margin-bottom: 15px; object-fit: cover; 
+            width: 180px; height: 180px; border-radius: 50%; 
+            margin-bottom: 20px; object-fit: contain; /* object-fit: contain, щоб не обрізати лого */
             border: 5px solid white;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            background-color: white; /* Фон для логотипа, якщо він прозорий */
         }
 
         h1 { margin: 0 0 5px 0; font-size: 28px; color: #1e3c72; font-weight: 800; }
@@ -69,13 +68,12 @@
 <body>
 
 <div class="player-card">
-    <img src="Screenshot_2026-03-31-18-33-36-486_org.telegram.messenger.jpg" alt="Радіо Удвох" class="logo">
+    <img src="1774977175491.png" alt="Радіо Удвох" class="logo">
     
     <h1>Радіо Удвох</h1>
     <div class="slogan">Музика для серця ❤️</div>
     
-    <audio controls>
-        <source src="https://listen4.myradio24.com/78073" type="audio/mpeg">
+    <audio controls autoplay> <source src="https://listen4.myradio24.com/78073" type="audio/mpeg">
     </audio>
 
     <div class="btn-container">
