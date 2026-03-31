@@ -5,102 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Радіо Удвох</title>
     <style>
-        /* Базові стилі та фон сторінки */
         body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
             display: flex; justify-content: center; align-items: center; 
             min-height: 100vh; margin: 0; 
-            /* Синій градієнт з ефектом сяйва */
-            background: radial-gradient(circle at top right, #2a5298, #1e3c72);
-            background-attachment: fixed;
-            color: #333; padding: 40px 0;
-        }
-        
-        /* Сяючий елемент на фоні */
-        body::before {
-            content: ""; position: fixed; top: -10%; left: -10%; width: 40%; height: 40%;
-            background: rgba(255, 215, 0, 0.1); filter: blur(80px); border-radius: 50%; z-index: -1;
+            background: #0f172a; /* Глибокий темний фон для контрасту */
+            color: white; padding: 20px 0;
         }
 
-        /* Основна картка плеєра */
         .player-card { 
-            background: rgba(255, 255, 255, 0.95); 
-            backdrop-filter: blur(10px);
-            padding: 30px; 
-            border-radius: 40px; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3); 
+            background: #1e293b; 
+            padding: 25px; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
             text-align: center; 
-            width: 85%; max-width: 380px;
-            border: 1px solid rgba(255,255,255,0.3);
+            width: 90%; max-width: 400px;
+            border: 1px solid #334155;
         }
 
-        /* Стилізація та масштабування логотипа */
-        .logo { 
-            width: 180px; height: 180px; border-radius: 50%; 
+        /* Стиль для прямокутного логотипа як на вашому прикладі */
+        .logo-rect { 
+            width: 100%; 
+            max-width: 280px; 
+            height: auto; 
+            border-radius: 12px; 
             margin-bottom: 20px; 
-            object-fit: cover; /* Заповнює все коло */
-            transform: scale(1.3); /* Збільшує малюнок всередині кола */
-            border: 5px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            background-color: white; /* Щоб фон кола був білим */
+            border: 2px solid #fbbf24; /* Золотиста рамка */
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.4); /* Світіння */
         }
 
-        /* Заголовки та тексти */
-        h1 { margin: 10px 0 5px 0; font-size: 28px; color: #1e3c72; font-weight: 800; }
-        .slogan { color: #555; margin-bottom: 25px; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+        h1 { margin: 0; font-size: 26px; color: #fbbf24; }
+        .slogan { color: #94a3b8; margin-bottom: 20px; font-size: 14px; text-transform: uppercase; }
         
-        /* Аудіоплеєр */
-        audio { width: 100%; margin-bottom: 30px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); }
+        audio { width: 100%; margin-bottom: 25px; height: 40px; }
 
-        /* Контейнер для кнопок */
-        .btn-container { display: flex; flex-direction: column; gap: 12px; }
+        .btn-container { display: flex; flex-direction: column; gap: 10px; }
         
-        /* Загальний стиль кнопок */
         .btn {
             display: flex; align-items: center; justify-content: center;
-            padding: 14px; color: white; text-decoration: none;
-            border-radius: 18px; font-weight: bold; font-size: 16px;
-            transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 12px; color: white; text-decoration: none;
+            border-radius: 12px; font-weight: bold; transition: 0.3s;
+            background: #334155; border: 1px solid #475569;
         }
         
-        /* Специфічні кольори для соцмереж */
-        .btn-blog { background: linear-gradient(to right, #f57d00, #ff9800); }
-        .btn-tg { background: linear-gradient(to right, #0088cc, #24A1DE); }
-        
-        /* Секція донатів */
-        .donate-section { margin-top: 30px; border-top: 2px dashed #eee; padding-top: 20px; }
-        .donate-title { font-size: 12px; font-weight: 800; color: #d32f2f; margin-bottom: 15px; letter-spacing: 1px; }
-        
-        /* Кольори для кнопок донатів */
-        .btn-mono { background: #1a1a1a; }
-        .btn-privat { background: #74b72e; }
-        .btn-idea { background: #ed1c24; }
+        .btn:hover { background: #475569; transform: translateY(-2px); }
+        .btn-main { background: #fbbf24; color: #0f172a; border: none; }
+        .btn-main:hover { background: #f59e0b; }
 
-        /* Ефект наведення на кнопки */
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); opacity: 0.95; }
+        .donate-box { 
+            margin-top: 20px; 
+            padding: 15px; 
+            border: 1px dashed #fbbf24; 
+            border-radius: 15px; 
+        }
+        .donate-title { font-size: 12px; color: #fbbf24; margin-bottom: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
 <div class="player-card">
-    <img src="1774977175491.png" alt="Радіо Удвох" class="logo">
+    <img src="ТУТ_НАЗВА_ВАШОГО_ФАЙЛУ.png" alt="Радіо Удвох" class="logo-rect">
     
     <h1>Радіо Удвох</h1>
     <div class="slogan">Музика для серця ❤️</div>
     
-    <audio controls autoplay>
+    <audio controls>
         <source src="https://listen4.myradio24.com/78073" type="audio/mpeg">
     </audio>
 
     <div class="btn-container">
-        <a href="https://radioudvoh.blogspot.com" target="_blank" class="btn btn-blog">🌐 Наш сайт</a>
-        <a href="https://t.me/+QVN4bYIrDRRmMGM6" target="_blank" class="btn btn-tg">✈️ Telegram канал</a>
+        <a href="https://radioudvoh.blogspot.com" target="_blank" class="btn btn-main">🌐 Наш сайт</a>
+        <a href="https://t.me/+QVN4bYIrDRRmMGM6" target="_blank" class="btn">✈️ Telegram канал</a>
         
-        <div class="donate-section">
-            <div class="donate-title">ПІДТРИМАТИ ПРОЄКТ</div>
-            <a href="https://send.monobank.ua/jar/ALGbQ8CaYU" target="_blank" class="btn btn-mono">🖤 Монобанк</a>
-            <a href="https://www.privat24.ua/send/i0qz3" target="_blank" class="btn btn-privat" style="margin: 12px 0;">💚 ПриватБанк</a>
-            <a href="https://pay.obank.com.ua/payment?type=skrynka&uuid=4B45E725-F5D1-4BF6-9CDD-2E81C98074C7" target="_blank" class="btn btn-idea">❤️ Ідея Банк</a>
+        <div class="donate-box">
+            <div class="donate-title">ПІДТРИМАТИ ПРОЄКТ ❤️</div>
+            <a href="https://send.monobank.ua/jar/ALGbQ8CaYU" target="_blank" class="btn" style="margin-bottom: 8px;">👍 Через Монобанк</a>
+            <a href="https://www.privat24.ua/send/i0qz3" target="_blank" class="btn" style="margin-bottom: 8px;">❤️ Через ПриватБанк</a>
+            <a href="https://pay.obank.com.ua/payment?type=skrynka&uuid=4B45E725-F5D1-4BF6-9CDD-2E81C98074C7" target="_blank" class="btn">❤️ Через Ідея Банк</a>
         </div>
     </div>
 </div>
