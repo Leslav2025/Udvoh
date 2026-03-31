@@ -5,20 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Радіо Удвох</title>
     <style>
+        /* Базові стилі та фон сторінки */
         body { 
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
             display: flex; justify-content: center; align-items: center; 
             min-height: 100vh; margin: 0; 
+            /* Синій градієнт з ефектом сяйва */
             background: radial-gradient(circle at top right, #2a5298, #1e3c72);
             background-attachment: fixed;
             color: #333; padding: 40px 0;
         }
         
+        /* Сяючий елемент на фоні */
         body::before {
             content: ""; position: fixed; top: -10%; left: -10%; width: 40%; height: 40%;
             background: rgba(255, 215, 0, 0.1); filter: blur(80px); border-radius: 50%; z-index: -1;
         }
 
+        /* Основна картка плеєра */
         .player-card { 
             background: rgba(255, 255, 255, 0.95); 
             backdrop-filter: blur(10px);
@@ -30,21 +34,28 @@
             border: 1px solid rgba(255,255,255,0.3);
         }
 
+        /* Стилізація та масштабування логотипа */
         .logo { 
             width: 180px; height: 180px; border-radius: 50%; 
-            margin-bottom: 20px; object-fit: contain; /* object-fit: contain, щоб не обрізати лого */
+            margin-bottom: 20px; 
+            object-fit: cover; /* Заповнює все коло */
+            transform: scale(1.3); /* Збільшує малюнок всередині кола */
             border: 5px solid white;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            background-color: white; /* Фон для логотипа, якщо він прозорий */
+            background-color: white; /* Щоб фон кола був білим */
         }
 
-        h1 { margin: 0 0 5px 0; font-size: 28px; color: #1e3c72; font-weight: 800; }
+        /* Заголовки та тексти */
+        h1 { margin: 10px 0 5px 0; font-size: 28px; color: #1e3c72; font-weight: 800; }
         .slogan { color: #555; margin-bottom: 25px; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
         
+        /* Аудіоплеєр */
         audio { width: 100%; margin-bottom: 30px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.1)); }
 
+        /* Контейнер для кнопок */
         .btn-container { display: flex; flex-direction: column; gap: 12px; }
         
+        /* Загальний стиль кнопок */
         .btn {
             display: flex; align-items: center; justify-content: center;
             padding: 14px; color: white; text-decoration: none;
@@ -52,16 +63,20 @@
             transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
+        /* Специфічні кольори для соцмереж */
         .btn-blog { background: linear-gradient(to right, #f57d00, #ff9800); }
         .btn-tg { background: linear-gradient(to right, #0088cc, #24A1DE); }
         
+        /* Секція донатів */
         .donate-section { margin-top: 30px; border-top: 2px dashed #eee; padding-top: 20px; }
         .donate-title { font-size: 12px; font-weight: 800; color: #d32f2f; margin-bottom: 15px; letter-spacing: 1px; }
         
+        /* Кольори для кнопок донатів */
         .btn-mono { background: #1a1a1a; }
         .btn-privat { background: #74b72e; }
         .btn-idea { background: #ed1c24; }
 
+        /* Ефект наведення на кнопки */
         .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); opacity: 0.95; }
     </style>
 </head>
@@ -73,7 +88,8 @@
     <h1>Радіо Удвох</h1>
     <div class="slogan">Музика для серця ❤️</div>
     
-    <audio controls autoplay> <source src="https://listen4.myradio24.com/78073" type="audio/mpeg">
+    <audio controls autoplay>
+        <source src="https://listen4.myradio24.com/78073" type="audio/mpeg">
     </audio>
 
     <div class="btn-container">
