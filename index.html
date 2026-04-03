@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Радіо Удвох</title>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
     <style>
         body { 
             font-family: 'Segoe UI', Roboto, sans-serif; 
@@ -11,7 +12,7 @@
             min-height: 100vh; margin: 0; 
             background: #0f172a; 
             color: white; padding: 20px 0;
-            flex-direction: column; /* Щоб футер був знизу */
+            flex-direction: column;
         }
 
         .player-card { 
@@ -23,16 +24,12 @@
             width: 90%; max-width: 400px;
             border: 1px solid #334155;
             position: relative;
-            margin-bottom: 20px; /* Відступ до футера */
+            margin-bottom: 20px;
         }
 
         .logo-rect { 
-            width: 100%; 
-            max-width: 320px; 
-            height: auto; 
-            border-radius: 12px; 
-            margin-bottom: 20px; 
-            border: 2px solid #fbbf24;
+            width: 100%; max-width: 320px; height: auto; border-radius: 12px; 
+            margin-bottom: 20px; border: 2px solid #fbbf24;
             box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
         }
 
@@ -48,79 +45,25 @@
             padding: 14px; color: white; text-decoration: none;
             border-radius: 12px; font-weight: bold; transition: 0.3s;
             background: #334155; border: 1px solid #475569;
-            cursor: pointer;
-            font-size: 16px;
+            cursor: pointer; font-size: 16px;
         }
         
         .btn:hover { background: #475569; transform: translateY(-2px); }
         .btn-main { background: #fbbf24; color: #0f172a; border: none; }
-        .btn-main:hover { background: #f59e0b; }
 
         .donate-box { 
-            margin-top: 25px; 
-            padding: 15px; 
-            border: 1px dashed #fbbf24; 
-            border-radius: 15px; 
-            background: rgba(251, 191, 36, 0.05);
+            margin-top: 25px; padding: 15px; border: 1px dashed #fbbf24; 
+            border-radius: 15px; background: rgba(251, 191, 36, 0.05);
         }
         .donate-title { font-size: 13px; color: #fbbf24; margin-bottom: 12px; font-weight: bold; letter-spacing: 1px; }
 
-        /* Футер з авторськими правами */
-        .footer {
-            font-size: 12px;
-            color: #64748b;
-            text-align: center;
-            padding: 10px;
-            width: 90%;
-            max-width: 400px;
-            line-height: 1.5;
-        }
+        /* Стилі для TON кнопок */
+        #ton-actions { display: none; margin-top: 15px; gap: 8px; justify-content: center; flex-wrap: wrap; }
+        .btn-ton { background: #007aff; border: none; font-size: 13px; padding: 10px 15px; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-ton:hover { background: #005bb5; }
+
+        .footer { font-size: 12px; color: #64748b; text-align: center; padding: 10px; width: 90%; max-width: 400px; line-height: 1.5; }
         .footer strong { color: #94a3b8; }
-
-        /* Модальні вікна */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0; top: 0;
-            width: 100%; height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-content {
-            background-color: #1e293b;
-            margin: 15% auto;
-            padding: 30px;
-            border: 1px solid #fbbf24;
-            border-radius: 20px;
-            width: 80%;
-            max-width: 450px;
-            text-align: center;
-            color: #e2e8f0;
-            position: relative;
-        }
-
-        .modal-content h2 { color: #fbbf24; margin-top: 0; }
-        .close-modal {
-            color: #94a3b8;
-            position: absolute;
-            top: 10px; right: 20px;
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-        .email-box {
-            background: #0f172a;
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px solid #334155;
-            margin-top: 15px;
-            font-weight: bold;
-            color: #fbbf24;
-            word-break: break-all;
-            user-select: all;
-        }
     </style>
 </head>
 <body>
@@ -138,55 +81,68 @@
     <div class="btn-container">
         <a href="https://radioudvoh.blogspot.com" target="_blank" class="btn btn-main">🌐 Наш сайт</a>
         <a href="https://t.me/+QVN4bYIrDRRmMGM6" target="_blank" class="btn">✈️ Telegram канал</a>
-        <button onclick="openModal('aboutModal')" class="btn">📖 Про радіо</button>
-        <button onclick="openModal('contactModal')" class="btn">✉️ Зв'язок з нами</button>
         
         <div class="donate-box">
             <div class="donate-title">ПІДТРИМАТИ ПРОЄКТ ❤️</div>
-            <a href="https://send.monobank.ua/jar/ALGbQ8CaYU" target="_blank" class="btn" style="margin-bottom: 8px;">👍 Через Монобанк</a>
-            <a href="https://www.privat24.ua/send/i0qz3" target="_blank" class="btn" style="margin-bottom: 8px;">❤️ Через ПриватБанк</a>
-            <a href="https://pay.obank.com.ua/payment?type=skrynka&uuid=4B45E725-F5D1-4BF6-9CDD-2E81C98074C7" target="_blank" class="btn">❤️ Через Ідея Банк</a>
+            
+            <div id="ton-connect-button" style="display: flex; justify-content: center; margin-bottom: 10px;"></div>
+            
+            <div id="ton-actions">
+                <button class="btn-ton" onclick="sendDonation(1)">1 TON</button>
+                <button class="btn-ton" onclick="sendDonation(5)">5 TON</button>
+                <button class="btn-ton" onclick="sendDonation(10)">10 TON</button>
+            </div>
+
+            <div style="margin: 15px 0; font-size: 11px; color: #475569; border-top: 1px solid #334155; padding-top: 15px;">АБО КАРТКОЮ</div>
+
+            <a href="https://send.monobank.ua/jar/ALGbQ8CaYU" target="_blank" class="btn" style="margin-bottom: 8px; font-size: 13px;">👍 Через Монобанк</a>
+            <a href="https://www.privat24.ua/send/i0qz3" target="_blank" class="btn" style="margin-bottom: 8px; font-size: 13px;">❤️ Через ПриватБанк</a>
+            <a href="https://pay.obank.com.ua/payment?type=skrynka&uuid=4B45E725-F5D1-4BF6-9CDD-2E81C98074C7" target="_blank" class="btn" style="font-size: 13px;">❤️ Через Ідея Банк</a>
         </div>
     </div>
 </div>
 
 <div class="footer">
-    &copy; 2023-2024. Усі права захищені.<br>
+    &copy; 2023-2026. Усі права захищені.<br>
     Запорізькі письменники: <strong>Ольга Ліщук</strong>, <strong>Михайло Буряк</strong>.<br>
     Інтерфейс розроблено за участю <strong>Gemini AI</strong>.
 </div>
 
-<div id="aboutModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal('aboutModal')">&times;</span>
-        <h2>Про Радіо Удвох</h2>
-        <p>Радіо створено запорізькими письменниками <strong>Ольгою Ліщук та Михайлом Буряком</strong> для популяризації власної творчості та взагалі творчих людей України.</p>
-    </div>
-</div>
-
-<div id="contactModal" class="modal">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closeModal('contactModal')">&times;</span>
-        <h2>Зв'язок з адміністрацією</h2>
-        <p>Для пропозицій та співпраці пишіть на нашу пошту:</p>
-        <div class="email-box">udvohzavzhdy@gmail.com</div>
-        <p style="font-size: 12px; color: #94a3b8; margin-top: 10px;">(виділіть адресу, щоб скопіювати)</p>
-    </div>
-</div>
-
 <script>
-    function openModal(id) {
-        document.getElementById(id).style.display = "block";
-    }
+    // Ваш гаманець
+    const MY_WALLET = "UQDXq1iAqu88tVRG62_k03kAXELu_1gzRBMye-VZoFRIRtWw";
 
-    function closeModal(id) {
-        document.getElementById(id).style.display = "none";
-    }
+    // Налаштування TON Connect
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: 'https://leslav2025.github.io/Udvoh/radio-manifest.json',
+        buttonRootId: 'ton-connect-button'
+    });
 
-    // Закриття при кліку поза вікном
-    window.onclick = function(event) {
-        if (event.target.className === 'modal') {
-            event.target.style.display = "none";
+    // Стежимо за статусом гаманця
+    tonConnectUI.onStatusChange(wallet => {
+        const actionsBlock = document.getElementById('ton-actions');
+        if (wallet) {
+            actionsBlock.style.display = 'flex'; // Показуємо кнопки 1, 5, 10 TON
+        } else {
+            actionsBlock.style.display = 'none';
+        }
+    });
+
+    async function sendDonation(amount) {
+        const transaction = {
+            validUntil: Math.floor(Date.now() / 1000) + 300,
+            messages: [{
+                address: MY_WALLET,
+                amount: (amount * 1000000000).toString() // Переводимо в нанотони
+            }]
+        };
+
+        try {
+            const result = await tonConnectUI.sendTransaction(transaction);
+            if (result) alert("Дякуємо за підтримку Радіо Удвох! ❤️");
+        } catch (e) {
+            console.error(e);
+            alert("Помилка транзакції або скасування.");
         }
     }
 </script>
