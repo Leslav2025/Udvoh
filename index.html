@@ -27,6 +27,11 @@
             margin-bottom: 20px;
         }
 
+        /* Стилі для перемикача мов */
+        .lang-switcher { display: flex; justify-content: center; gap: 8px; margin-bottom: 15px; }
+        .lang-btn { cursor: pointer; font-size: 18px; background: #334155; border: 1px solid #475569; padding: 5px 8px; border-radius: 6px; transition: 0.2s; }
+        .lang-btn:hover { background: #475569; }
+
         .logo-rect { 
             width: 100%; max-width: 320px; height: auto; border-radius: 12px; 
             margin-bottom: 20px; border: 2px solid #fbbf24;
@@ -57,7 +62,6 @@
         }
         .donate-title { font-size: 13px; color: #fbbf24; margin-bottom: 12px; font-weight: bold; letter-spacing: 1px; }
 
-        /* Стилі для TON кнопок */
         #ton-actions { display: none; margin-top: 15px; gap: 8px; justify-content: center; flex-wrap: wrap; }
         .btn-ton { background: #007aff; border: none; font-size: 13px; padding: 10px 15px; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; transition: 0.2s; }
         .btn-ton:hover { background: #005bb5; }
@@ -69,21 +73,30 @@
 <body>
 
 <div class="player-card">
+    <div class="lang-switcher">
+        <button class="lang-btn" onclick="setLanguage('uk')">🇺🇦</button>
+        <button class="lang-btn" onclick="setLanguage('en')">🇬🇧</button>
+        <button class="lang-btn" onclick="setLanguage('de')">🇩🇪</button>
+        <button class="lang-btn" onclick="setLanguage('fr')">🇫🇷</button>
+        <button class="lang-btn" onclick="setLanguage('it')">🇮🇹</button>
+        <button class="lang-btn" onclick="setLanguage('pl')">🇵🇱</button>
+    </div>
+
     <img src="1774985247528.png" alt="Радіо Удвох" class="logo-rect">
     
-    <h1>Радіо Удвох</h1>
-    <div class="slogan">Музика для серця ❤️</div>
+    <h1 data-i18n="title">Радіо Удвох</h1>
+    <div class="slogan" data-i18n="slogan">Музика для серця ❤️</div>
     
     <audio controls>
         <source src="https://listen4.myradio24.com/78073" type="audio/mpeg">
     </audio>
 
     <div class="btn-container">
-        <a href="https://radioudvoh.blogspot.com" target="_blank" class="btn btn-main">🌐 Наш сайт</a>
-        <a href="https://t.me/+QVN4bYIrDRRmMGM6" target="_blank" class="btn">✈️ Telegram канал</a>
+        <a href="https://radioudvoh.blogspot.com" target="_blank" class="btn btn-main" data-i18n="site">🌐 Наш сайт</a>
+        <a href="https://t.me/+QVN4bYIrDRRmMGM6" target="_blank" class="btn" data-i18n="telegram">✈️ Telegram канал</a>
         
         <div class="donate-box">
-            <div class="donate-title">ПІДТРИМАТИ ПРОЄКТ ❤️</div>
+            <div class="donate-title" data-i18n="donate_title">ПІДТРИМАТИ ПРОЄКТ ❤️</div>
             
             <div id="ton-connect-button" style="display: flex; justify-content: center; margin-bottom: 10px;"></div>
             
@@ -93,36 +106,53 @@
                 <button class="btn-ton" onclick="sendDonation(10)">10 TON</button>
             </div>
 
-            <div style="margin: 15px 0; font-size: 11px; color: #475569; border-top: 1px solid #334155; padding-top: 15px;">АБО КАРТКОЮ</div>
+            <div style="margin: 15px 0; font-size: 11px; color: #475569; border-top: 1px solid #334155; padding-top: 15px;" data-i18n="or_card">АБО КАРТКОЮ</div>
 
-            <a href="https://send.monobank.ua/jar/ALGbQ8CaYU" target="_blank" class="btn" style="margin-bottom: 8px; font-size: 13px;">👍 Через Монобанк</a>
-            <a href="https://www.privat24.ua/send/i0qz3" target="_blank" class="btn" style="margin-bottom: 8px; font-size: 13px;">❤️ Через ПриватБанк</a>
-            <a href="https://pay.obank.com.ua/payment?type=skrynka&uuid=4B45E725-F5D1-4BF6-9CDD-2E81C98074C7" target="_blank" class="btn" style="font-size: 13px;">❤️ Через Ідея Банк</a>
+            <a href="https://send.monobank.ua/jar/ALGbQ8CaYU" target="_blank" class="btn" style="margin-bottom: 8px; font-size: 13px;" data-i18n="mono">👍 Через Монобанк</a>
+            <a href="https://www.privat24.ua/send/i0qz3" target="_blank" class="btn" style="margin-bottom: 8px; font-size: 13px;" data-i18n="privat">❤️ Через ПриватБанк</a>
+            <a href="https://pay.obank.com.ua/payment?type=skrynka&uuid=4B45E725-F5D1-4BF6-9CDD-2E81C98074C7" target="_blank" class="btn" style="font-size: 13px;" data-i18n="idea">❤️ Через Ідея Банк</a>
         </div>
     </div>
 </div>
 
 <div class="footer">
-    &copy; 2023-2026. Усі права захищені.<br>
-    Запорізькі письменники: <strong>Ольга Ліщук</strong>, <strong>Михайло Буряк</strong>.<br>
-    Інтерфейс розроблено за участю <strong>Gemini AI</strong>.
+    &copy; 2023-2026. <span data-i18n="rights">Усі права захищені.</span><br>
+    <span data-i18n="authors">Запорізькі письменники</span>: <strong>Ольга Ліщук</strong>, <strong>Михайло Буряк</strong>.<br>
+    <span data-i18n="credits">Інтерфейс розроблено за участю <strong>Gemini AI</strong>.</span>
 </div>
 
 <script>
-    // Ваш гаманець
+    // --- Логіка перекладу ---
+    const translations = {
+        uk: { title: "Радіо Удвох", slogan: "Музика для серця ❤️", site: "🌐 Наш сайт", telegram: "✈️ Telegram канал", donate_title: "ПІДТРИМАТИ ПРОЄКТ ❤️", or_card: "АБО КАРТКОЮ", mono: "👍 Через Монобанк", privat: "❤️ Через ПриватБанк", idea: "❤️ Через Ідея Банк", rights: "Усі права захищені.", authors: "Запорізькі письменники", credits: "Інтерфейс розроблено за участю" },
+        en: { title: "Radio Udvoh", slogan: "Music for the heart ❤️", site: "🌐 Our website", telegram: "✈️ Telegram channel", donate_title: "SUPPORT THE PROJECT ❤️", or_card: "OR BY CARD", mono: "👍 Via Monobank", privat: "❤️ Via PrivatBank", idea: "❤️ Via Idea Bank", rights: "All rights reserved.", authors: "Zaporizhzhia writers", credits: "Interface designed with the help of" },
+        de: { title: "Radio Udvoh", slogan: "Musik fürs Herz ❤️", site: "🌐 Unsere Website", telegram: "✈️ Telegram-Kanal", donate_title: "PROJEKT UNTERSTÜTZEN ❤️", or_card: "ODER PER KARTE", mono: "👍 Über Monobank", privat: "❤️ Über PrivatBank", idea: "❤️ Über Idea Bank", rights: "Alle Rechte vorbehalten.", authors: "Saporischschja-Schriftsteller", credits: "Interface entwickelt mit Hilfe von" },
+        fr: { title: "Radio Udvoh", slogan: "Musique pour le cœur ❤️", site: "🌐 Notre site", telegram: "✈️ Chaîne Telegram", donate_title: "SOUTENIR LE PROJET ❤️", or_card: "OU PAR CARTE", mono: "👍 Via Monobank", privat: "❤️ Via PrivatBank", idea: "❤️ Via Idea Bank", rights: "Tous droits réservés.", authors: "Écrivains de Zaporijjia", credits: "Interface conçue avec l'aide de" },
+        it: { title: "Radio Udvoh", slogan: "Musica per il cuore ❤️", site: "🌐 Il nostro sito", telegram: "✈️ Canale Telegram", donate_title: "SOSTIENI IL PROGETTO ❤️", or_card: "O TRAMITE CARTA", mono: "👍 Via Monobank", privat: "❤️ Via PrivatBank", idea: "❤️ Via Idea Bank", rights: "Tutti i diritti riservati.", authors: "Scrittori di Zaporizhzhia", credits: "Interfaccia progettata con l'aiuto di" },
+        pl: { title: "Radio Udvoh", slogan: "Muzyka dla serca ❤️", site: "🌐 Nasza strona", telegram: "✈️ Kanał Telegram", donate_title: "WSPARJ PROJEKT ❤️", or_card: "LUB KARTĄ", mono: "👍 Przez Monobank", privat: "❤️ Przez PrivatBank", idea: "❤️ Przez Idea Bank", rights: "Wszelkie prawa zastrzeżone.", authors: "Pisarze z Zaporoża", credits: "Interfejs zaprojektowany przy pomocy" }
+    };
+
+    function setLanguage(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                element.innerText = translations[lang][key];
+            }
+        });
+    }
+
+    // --- Ваш існуючий код ---
     const MY_WALLET = "UQDXq1iAqu88tVRG62_k03kAXELu_1gzRBMye-VZoFRIRtWw";
 
-    // Налаштування TON Connect
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: 'https://leslav2025.github.io/Udvoh/radio-manifest.json',
         buttonRootId: 'ton-connect-button'
     });
 
-    // Стежимо за статусом гаманця
     tonConnectUI.onStatusChange(wallet => {
         const actionsBlock = document.getElementById('ton-actions');
         if (wallet) {
-            actionsBlock.style.display = 'flex'; // Показуємо кнопки 1, 5, 10 TON
+            actionsBlock.style.display = 'flex';
         } else {
             actionsBlock.style.display = 'none';
         }
@@ -133,7 +163,7 @@
             validUntil: Math.floor(Date.now() / 1000) + 300,
             messages: [{
                 address: MY_WALLET,
-                amount: (amount * 1000000000).toString() // Переводимо в нанотони
+                amount: (amount * 1000000000).toString()
             }]
         };
 
