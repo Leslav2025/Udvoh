@@ -1,8 +1,8 @@
 function loadAds() {
-    const adContainer = document.getElementById('ad-space');
+    // Важливо: ID тут має збігатися з тим, що у вас в HTML!
+    const adContainer = document.getElementById('ad-slot'); 
     if (!adContainer) return;
 
-    // Ваші актуальні рекламні позиції
     const ads = [
         {
             title: "💰 Зароби на каналі!",
@@ -36,11 +36,10 @@ function loadAds() {
         }
     ];
 
-    // Вибір випадкової реклами
     const randomAd = ads[Math.floor(Math.random() * ads.length)];
 
-    // HTML код з блоком замовлення реклами зверху
-    const adContent = 
+    // ТУТ ВАЖЛИВО: додані `зворотні лапки` на початку та в кінці
+    const adContent = `
         <div style="margin: 20px 0; border-radius: 12px; overflow: hidden; border: 1px solid #334155; background: #111827;">
             <div style="background: #1e293b; padding: 8px 15px; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center;">
                 <span style="color: #94a3b8; font-size: 11px; font-weight: bold; text-transform: uppercase;">Реклама в боті</span>
@@ -59,7 +58,7 @@ function loadAds() {
                 </a>
             </div>
         </div>
-    ;
+    `;
 
     adContainer.innerHTML = adContent;
 }
