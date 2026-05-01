@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Радіо Удвох</title>
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <script src="ads.js" defer></script>
     <style>
         body { 
             font-family: 'Segoe UI', Roboto, sans-serif; 
@@ -55,6 +56,9 @@
         
         .btn:hover { background: #475569; transform: translateY(-2px); }
         .btn-main { background: #fbbf24; color: #0f172a; border: none; }
+
+        /* Стиль для рекламного блоку */
+        .ad-container { margin-top: 20px; min-height: 100px; border: 1px solid #334155; border-radius: 12px; overflow: hidden; }
 
         .donate-box { 
             margin-top: 25px; padding: 15px; border: 1px dashed #fbbf24; 
@@ -113,6 +117,8 @@
             <a href="https://pay.obank.com.ua/payment?type=skrynka&uuid=4B45E725-F5D1-4BF6-9CDD-2E81C98074C7" target="_blank" class="btn" style="font-size: 13px;" data-i18n="idea">❤️ Через Ідея Банк</a>
         </div>
     </div>
+
+    <div id="ad-slot" class="ad-container"></div>
 </div>
 
 <div class="footer">
